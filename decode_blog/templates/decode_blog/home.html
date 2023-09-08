@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ title }}</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
+</head>
+<body>
+    
+    <header class="header container">
+      <div class="header-logo">
+          <a href="">Decode Blog</a>  
+      </div>
+      <div class="header-search">
+        <input type="text" class="input-search" placeholder="Поиск по блогам">
+        <button class="button button-search">
+          <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
+          Найти
+        </button>
+      </div>
+      <div>
+        
+            <div class="button-group">
+              <!-- { if } -->
+                <a href="" class="button">Регистрация</a>
+              <!-- { endif } -->
+                <a href="" class="button">Вход</a>
+            </div>
+    
+      </div>
+    </header>
+
+    <section class="container page">
+      <div class="page-content">
+        <h2 class="page-title">Блоги по программированию</h2>
+        <p class="page-desc">Популярные и лучшие публикации по программированию для начинающих
+   и профессиональных программистов и IT-специалистов.</p>
+        <div class="blogs">
+          <div class="blog-item">
+            <img class="blog-item--img" src="{% static 'decode_blog/images/1.png' %}" alt="">
+    
+            <div class="blog-header">
+              <p class="blog-header-p">Обзор Report Manager от Webix</p>
+            </div>
+            <p class="blog-desc">
+              Осень 2020 года стала плодотворным временем для специалистов Webix. 
+    
+              Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
+    
+              Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим его
+            </p>
+          </div>
+        </div>
+
+        <div class="blog-info">
+          <span class="link">
+            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
+            26.06.2020
+          </span>
+          <span class="link">
+            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
+            21
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+            4
+          </a>
+          <span class="link">
+            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
+            Веб-разработка
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
+            Nast1289
+          </a>
+        </div>
+    
+        <img class="blog-item--img2" src="{% static 'decode_blog/images/3.png' %}" alt=""> 
+    
+        <div class="blog-header">
+          <p class="blog-header-p">Разработчики изоберли методологию высокоскоростного программироавания</p>
+        </div>
+        <p class="blog-desc">
+          Осень 2020 года стала плодотворным временем для специалистов Webix. 
+
+          Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
+
+          Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим его
+        </p>
+
+        <div class="blog-info">
+          <span class="link">
+            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
+            26.06.2020
+          </span>
+          <span class="link">
+            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
+            21
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+            4
+          </a>
+          <span class="link">
+            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
+            Веб-разработка
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
+            Nast1289
+          </a>
+        </div>
+
+      </div>
+
+      
+      <div class="page-info">
+        <div class="page-header">
+                <h2>Категории</h2>
+            </div>
+            <a href="" class="categories">Прогнозы в IT</a>
+            <a class='list-item' href=''></a>
+            <a href="" class="categories">Веб-разработка</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Мобильная разработка</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Фриланс</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Алгоритмы</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Тестирование IT систем</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Разработка игр</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Дизайн и юзабилити</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Искусственный интеллект</a>
+            <a class='list-item' href=''></a><a href="" class="categories">Машинное обучение</a>
+            <a class='list-item' href=''></a>
+            
+      </div>
+    </section>  
+    
+</body>
+</html>
