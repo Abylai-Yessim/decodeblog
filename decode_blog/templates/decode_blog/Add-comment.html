@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add comment</title>
+    <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'decode_blog/css/add-blog.css' %}">
+</head>
+<body>
+    <header class="header container">
+        <div class="header-logo">
+            <a href="{% url 'decode_blog:home' %}">Decode Blog</a>  
+        </div>
+        <div class="header-search">
+          <input type="text" class="input-search" placeholder="Поиск по блогам">
+          <button class="button button-search">
+            <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
+            Найти
+          </button>
+        </div>
+        <div>
+    </header>
+
+    <section class="main">
+        <form action="{% url 'decode_blog:cmadd' %}" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}   <!--Специалынй токен -->
+            {{ form.as_p }}
+            <button type="submit">Сохранить</button>
+    </section>
+</body>
+</html>

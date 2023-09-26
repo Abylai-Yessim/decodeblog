@@ -74,3 +74,70 @@
     padding-bottom: 20px;
     min-height: calc(100vh - 130px);
 }
+
+.auth-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto 50px;
+}
+
+.auth-form h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.auth-form .fieldset {
+    width: 100%;
+}
+
+.auth-form .button {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.authe-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.authe-form p{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.authe-form p label{
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.authe-form p input,
+.authe-form p textarea,
+.authe-form p select {
+    padding: 5px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+}
+
+.authe-form p textarea {
+    resize: none;
+}
+
+.authe-form button {
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.authe-form .helptext,
+.authe-form > ul{
+    display: none;
+}
+

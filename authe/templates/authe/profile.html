@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ title }}</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/user.css' %}">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/newblog.css' %}">
+  <link rel="stylesheet" href="{% static 'authe/css/signup.css' %}">
+</head>
+<body>
+    
+    <header class="header container">
+      {% for m in menu %}
+      <div class="header-logo">
+          <a href="{% url 'decode_blog:home' %}">{{ m.title }}</a>  
+      </div>
+      {% endfor %}
+      <div class="header-search">
+        <form action="{% url 'decode_blog:search' %}" method="get">
+          <input type="text" class="input-search" placeholder="Поиск по блогам" name="q" type="search">
+        <button class="button button-search">
+          <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
+          Найти
+        </button>
+        </form>
+      </div>
+      <div>
+
+        {% if request.user.is_authenticated %}
+              <div class="button-group">
+                <a href="{% url 'authe:profile' %}">
+                  <!-- <p>Добавить аватарку</p> -->
+                <img class="avatar" src="{% static 'decode_blog/images/avatar.png' %}" alt="Avatar">
+                </a>
+                <a href="{% url 'authe:signout' %}" class="button2">Выход</a>
+              </div>
+            {% else %}
+            <div class="button-group">
+              <a href="{% url 'authe:signup' %}" class="button">Регистрация</a>
+              <a href="{% url 'authe:signin' %}" class="button">Вход</a>
+            </div>
+            {% endif %}
+
+      </div>
+    </header>
+
+    <section class="container page">
+      <div class="page-content">
+        <div class="page-header">
+          <h2>Мои блоги</h2>
+
+          <a class="button blog-a" href="{% url 'decode_blog:newblog' %}">Новый блог</a>
+    
+        </div>
+
+        <div class="blogs">
+          {% for newblog in posts %}
+          <div class="blog-item">
+            {% if newblog.image %}
+              <img class="blog-item--img" src="{{ newblog.image.url }}" alt="">
+            {% endif %}
+            <div class="blog-header">
+              <p class="blog-header-p">{{ newblog.name }}</p>
+              <span class="link">
+                <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
+                Еще
+                <ul class="dropdown">
+                  <li> <a href="{% url 'decode_blog:newblog' %}">Редактировать</a> </li>
+                  <li><a href="" class="danger">Удалить</a></li>
+                </ul>
+              </span>
+    
+            </div>
+            <p class="blog-desc">
+              {{ newblog.description }}
+            </p>
+    
+            <div class="blog-info">
+              <span class="link">
+                <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
+                {{ newblog.date }}
+              </span>
+              <span class="link">
+                <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
+                21
+              </span>
+              <a class="link">
+                <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+                4
+              </a>
+              <span class="link">
+                <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
+                {{ newblog.category }}
+              </span>
+              <a class="link">
+                <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
+               {{ user.username }}
+              </a>
+            </div>
+
+            <!-- <img class="blog-item--img2" src="{% static 'decode_blog/images/3.png' %}" alt=""> 
+    
+        <div class="blog-header">
+          <p class="blog-header-p">Разработчики изоберли методологию высокоскоростного программироавания</p>
+        </div>
+        <p class="blog-desc">
+          Осень 2020 года стала плодотворным временем для специалистов Webix. 
+
+          Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
+
+          Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим его
+        </p>
+
+        <div class="blog-info">
+          <span class="link">
+            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
+            26.06.2020
+          </span>
+          <span class="link">
+            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
+            21
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+            4
+          </a>
+          <span class="link">
+            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
+            Веб-разработка
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
+            {{ user.username }}
+          </a>
+          </div> -->
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="page-info">
+		<div class="user-profile">
+			<img class="user-profile--ava" src="{% static 'decode_blog/images/avatar.png' %}" alt="">
+
+			<h1>
+      {{ user.username }}
+      </h1>
+			<h2>В основном пишу про веб - разработку, на React & Redux</h2>
+			<p>285 постов за все время</p>
+			<a href="{% url 'decode_blog:newblog' %}" class="button">Редактировать</a>
+		</div>
+	</div>
+
+    </section>	
+
+
+    
+</body>
+</html>

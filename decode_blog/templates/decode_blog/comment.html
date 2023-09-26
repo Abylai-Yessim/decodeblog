@@ -5,14 +5,10 @@
   <title>Профиль</title>
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'decode_blog/css/comment.css' %}">
 </head>
 <body>
-
 
 
 <header class="header container">
@@ -29,109 +25,65 @@
     </button>
   </div>
   <div>
-    
-        <div class="button-group">
-            <a href="" class="button">Регистрация</a>
-            <a href="" class="button">Вход</a>
-        </div>
+    <div class="button-group">
+      <!-- { if } -->
+        <a href="{% url 'authe:signup' %}" class="button">Регистрация</a>
+      <!-- { endif } -->
+        <a href="{% url 'authe:signin' %}" class="button">Вход</a>
+    </div>
 
   </div>
 </header>
 
-<section class="container page">
-  <div class="page-content">
-    <div class="blogs">
-      <div class="blog-item">
-        <img class="blog-item--img" src="{% static 'decode_blog/images/1.png' %}" alt="">
-
-                <div class="blog-info">
-          <span class="link">
-            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
-            26.06.2020
-          </span>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
-            21
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
-            4
-          </a>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
-            Веб-разработка
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
-            Nast1289
-          </a>
-        </div>
-
-        <div class="blog-header">
-          <h3>Обзор Report Manager от Webix</h3>
-        </div>
-        <p class="blog-desc">
-          Осень 2020 года стала плодотворным временем для специалистов Webix. 
-
-          Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
-
-          Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим ег
-        </p>
+<section class="main">
+  <div class="blogs">
+      <div class="com-blog">
+          <div class="main-info"> 
+              {% if newblog.image %}
+              <img src="{{ newblog.image.url }}" alt="comment-img" class="comment-img">
+              {% endif %}
+          </div>
+          <h2 id="blog-name">{{ newblog.name }}</h2>
+              <p id="description">{{ newblog.description }}</p>
+              <time id="blog-date">{{ newblog.date }}</time>
+              <a href="" id="blog-category">{{ newblog.category }}</a>
+              <hr>
       </div>
-    </div>
-
-        <div class="comments">
-            <h2>
-                2 комментариея
-            </h2>
-
-            <div class="comment">
-                <div class="comment-header">
-                    <img src="{% static 'decode_blog/images/avatar.png' %}" alt="">
-                    Елнур Сеитжанов
-                </div>
-                <p>
-                В отличие от обычных виджетов пользовательского интерфейса JavaScript, комплексные виджеты - это полноценные приложения, которые не требуют дополнительной настройки и кастомизации.
-                </p>
-            </div>
-
-            <div class="comment">
-                <div class="comment-header">
-                    <img src="{% static 'decode_blog/images/avatar.png' %}" alt="">
-                    Елнур Сеитжанов
-                </div>
-                <p>
-                В отличие от обычных виджетов пользовательского интерфейса JavaScript, комплексные виджеты - это полноценные приложения, которые не требуют дополнительной настройки и кастомизации.
-                </p>
-            </div>
-
-
-            <span class="comment-warning">
-                Чтобы оставить комментарий <a href="">зарегистрируйтесь</a> , или  <a href="">войдите</a>  в аккаунт.
-            </span>
-
-        </div>
   </div>
+  <div class="categories">
+      <h2 id="categories-name">Категории</h2>
+      {% if category_id == 0 %}
+          <a href="{% url 'decode_blog:home' %}" class="selected-ctgr">Все товары</a>
+      {% else %}
+          <a href="{% url 'decode_blog:home' %}">Все Блоги</a>
+      {% endif %}
 
-<div class="page-info">
-    <div class="page-header">
-            <h2>Категории</h2>
-        </div>
-        <a href="" class="categories">Прогнозы в IT</a>
-      <a class='list-item' href=''></a>
-      <a href="" class="categories">Веб-разработка</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Мобильная разработка</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Фриланс</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Алгоритмы</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Тестирование IT систем</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Разработка игр</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Дизайн и юзабилити</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Искусственный интеллект</a>
-      <a class='list-item' href=''></a><a href="" class="categories">Машинное обучение</a>
-      <a class='list-item' href=''></a>
-      
-       
-  </div>
-</section>  
+      {% for ctgr in categories %}
+          {% if category_id == ctgr.id %}
+              <a href="{% url 'decode_blog:category' ctgr.id %}" class="selected-ctgr">{{ctgr.name}}</a>
+          {% else %}
+              <a href="{% url 'decode_blog:category' ctgr.id %}">{{ctgr.name}}</a>
+          {% endif %}
+      {% endfor %}    
+</section>
+
+<section class="main-3">
+  <div class="comm-details">
+      {% for c in comments %}
+          <div class="comment">
+              <div class="comm-detail">
+                  <p id="user">{{ c.user }};</p> 
+                  <p>{{ c.date }}</p>
+              </div>
+              <p id="text">{{ c.text }}</p>
+          </div>
+      </div>
+      {% endfor %}
+      {% if request.user.is_authenticated %}
+          <a href="{% url 'decode_blog:cmadd' %}" id="button-com">Добавить комментарий</a>
+      {% else %}
+          <a href="{% url 'authe:signin' %}" id="button-come">SignIn</a>
+      {% endif %}
+</section>
 </body>
 </html>

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'authe/css/signup.css' %}">
+</head>
+<body>
+	<header class="header container">
+        {% for m in menu %}
+        <div class="header-logo">
+            <a href="{% url 'decode_blog:home' %}">Decode Blog</a>  
+        </div>
+        {% endfor %}
+        <div class="header-search">
+            <input type="text" class="input-search" placeholder="Поиск по блогам">
+            <button class="button button-search">
+                <img src="{% static 'authe/images/search.svg' %}" alt="">	
+                Найти
+            </button>
+        </div>
+        <div>
+            
+            <div class="button-group">
+                <a href="" class="button">Регистрация</a>
+                <a href="" class="button">Вход</a>
+            </div>
+    
+            
+        </div>
+    </header>
+
+	<section class="container page">
+		<div class="auth-form">
+            <h1>Вход</h1>
+
+            <form action="" method="POST" class="authe-form">
+                {% csrf_token %}
+        
+                {{ form.as_p }}
+        
+                <fieldset class="fieldset">
+                    <button class="button" type="submit">Войти</button>
+                </fieldset>
+
+			<!-- <form class="form">
+                <fieldset class="fieldset">
+                    <input class="input" type="text" name="email" placeholder="Введите email">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <input class="input" type="password" name="password" placeholder="Введите пароль">
+                </fieldset> -->
+
+                
+			<!-- </form> -->
+		</div>
+	</section>
+</body>
+</html>
