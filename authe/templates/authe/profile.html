@@ -19,13 +19,13 @@
       </div>
       {% endfor %}
       <div class="header-search">
-        <form action="{% url 'decode_blog:search' %}" method="get">
-          <input type="text" class="input-search" placeholder="Поиск по блогам" name="q" type="search">
-        <button class="button button-search">
-          <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
-          Найти
-        </button>
-        </form>
+        <form action="{% url 'decode_blog:search_action' %}" class="display-form">
+          <input type="search" class="input-search" placeholder="Поиск по блогам" name="search">
+          <button type="submit" class="button button-search">
+            <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
+            Найти
+          </button>
+        </form>
       </div>
       <div>
 
@@ -87,10 +87,6 @@
                 <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
                 21
               </span>
-              <a class="link">
-                <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
-                4
-              </a>
               <span class="link">
                 <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
                 {{ newblog.category }}
@@ -101,41 +97,7 @@
               </a>
             </div>
 
-            <!-- <img class="blog-item--img2" src="{% static 'decode_blog/images/3.png' %}" alt=""> 
-    
-        <div class="blog-header">
-          <p class="blog-header-p">Разработчики изоберли методологию высокоскоростного программироавания</p>
-        </div>
-        <p class="blog-desc">
-          Осень 2020 года стала плодотворным временем для специалистов Webix. 
-
-          Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
-
-          Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим его
-        </p>
-
-        <div class="blog-info">
-          <span class="link">
-            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
-            26.06.2020
-          </span>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
-            21
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
-            4
-          </a>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
-            Веб-разработка
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
-            {{ user.username }}
-          </a>
-          </div> -->
+           
           </div>
           {% endfor %}
         </div>

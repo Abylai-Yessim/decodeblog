@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/comment.css' %}">
 </head>
 <body>
     
@@ -14,11 +15,13 @@
           <a href="">Decode Blog</a>  
       </div>
       <div class="header-search">
-        <input type="text" class="input-search" placeholder="Поиск по блогам">
-        <button class="button button-search">
-          <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
-          Найти
-        </button>
+        <form action="{% url 'decode_blog:search_h' %}" class="display-form">
+          <input type="search_h" class="input-search" placeholder="Поиск по блогам" name="search_h">
+          <button type="submit" class="button button-search">
+            <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
+            Найти
+          </button>
+        </form>
       </div>
       <div>
         
@@ -31,89 +34,62 @@
     
       </div>
     </header>
-
     <section class="container page">
       <div class="page-content">
         <h2 class="page-title">Блоги по программированию</h2>
         <p class="page-desc">Популярные и лучшие публикации по программированию для начинающих
    и профессиональных программистов и IT-специалистов.</p>
-        <div class="blogs">
-          <div class="blog-item">
-            <img class="blog-item--img" src="{% static 'decode_blog/images/1.png' %}" alt="">
-    
-            <div class="blog-header">
-              <p class="blog-header-p">Обзор Report Manager от Webix</p>
-            </div>
-            <p class="blog-desc">
-              Осень 2020 года стала плодотворным временем для специалистов Webix. 
-    
-              Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
-    
-              Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим его
-            </p>
-          </div>
-        </div>
-
-        <div class="blog-info">
-          <span class="link">
-            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
-            26.06.2020
-          </span>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
-            21
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
-            4
-          </a>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
-            Веб-разработка
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
-            Nast1289
-          </a>
-        </div>
-    
-        <img class="blog-item--img2" src="{% static 'decode_blog/images/3.png' %}" alt=""> 
-    
-        <div class="blog-header">
-          <p class="blog-header-p">Разработчики изоберли методологию высокоскоростного программироавания</p>
-        </div>
-        <p class="blog-desc">
-          Осень 2020 года стала плодотворным временем для специалистов Webix. 
-
-          Команда Webix выпустила восьмую версию библиотеки пользовательского интерфейса Webix с двумя новыми комплексными виджетами. Первый - зто Scheduler, о котором мы подробно говорили ранее. Второй виджет - это Gantt chart в JavaScript. Подробную информацию об этом виджете Вы можете найти в статье. 
-
-          Ноябрь продолжает тенденцию, и мы спешим поделиться с Вами новым комплексным виджетом Report Manager. Давайте рассмотрим его
-        </p>
-
-        <div class="blog-info">
-          <span class="link">
-            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
-            26.06.2020
-          </span>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
-            21
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
-            4
-          </a>
-          <span class="link">
-            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
-            Веб-разработка
-          </span>
-          <a class="link">
-            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
-            Nast1289
-          </a>
-        </div>
+   <div class="blogs">
+    {% for n in newblogs %}
+    <div class="blog-item">
+      {% if n.image %}
+        <img class="blog-item--img" src="{{ n.image.url }}" alt="">
+      {% endif %}
+      <div class="blog-header">
+        <p class="blog-header-p">{{ n.name }}</p>
+        <span class="link">
+          <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
+          Еще
+          <ul class="dropdown">
+            <li> <a href="{% url 'decode_blog:newblog' %}">Редактировать</a> </li>
+            <li><a href="" class="danger">Удалить</a></li>
+          </ul>
+        </span>
 
       </div>
+      <p class="blog-desc">
+        {{ n.description }}
+      </p>
+
+      <div class="blog-info">
+        <span class="link">
+          <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
+          {{ n.date }}
+        </span>
+        
+        <div class="blog-info">
+          <span class="link">
+          <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+          <a href="{% url 'decode_blog:comments-blog' n.id %}" class="blogs-comments">Посмотреть комментарии</a>
+          </span>
+        </div>
+
+        <span class="link">
+          <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
+          {{ n.category }}
+        </span>
+
+        <a class="link">
+          <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
+         {{ n.username }}
+        </a>
+      </div>
+
+     
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
       
       <div class="page-info">

@@ -34,18 +34,10 @@ class NewBlog(models.Model):
     def __str__(self):
         return self.name
 
+
+
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_images')
     text = models.TextField(max_length=2000)
     date = models.DateTimeField(default=datetime.datetime.today())
     blog = models.ForeignKey(NewBlog, on_delete=models.CASCADE, default=1)
-
-    class Meta:
-        verbose_name = 'Comment'
-        verbose_name_plural = 'Comments'
-
-    def __str__(self):
-        return self.image
-
- 

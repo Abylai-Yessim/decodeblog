@@ -19,6 +19,8 @@ menu = [
     {'title': 'Decode blog', 'url': 'decode_blog:Home'},
 ]
 
+
+
 class SignUpUser(CreateView):
     form_class = SignUpUserForm
     template_name = 'authe/signup.html'

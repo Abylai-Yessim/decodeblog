@@ -346,13 +346,16 @@ html {
 .categories{
     color: #007BFF;
     text-decoration: none;
-   
+    margin-top: 5px;
+    
 }
 
 
 .page-info {
     display: flex;
     flex-direction: column;
+    width: 27%;
+    margin-left: 20px;
 }
 
 .page-info a {

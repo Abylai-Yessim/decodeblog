@@ -25,7 +25,7 @@
 
     <section class="main">
         <form action="{% url 'decode_blog:cmadd' %}" method="POST" enctype="multipart/form-data"> 
-            {% csrf_token %}   <!--Специалынй токен -->
+            {% csrf_token %}  
             {{ form.as_p }}
             <button type="submit">Сохранить</button>
     </section>

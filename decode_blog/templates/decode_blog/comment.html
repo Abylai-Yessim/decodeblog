@@ -11,6 +11,7 @@
 <body>
 
 
+
 <header class="header container">
   {% for m in menu %}
       <div class="header-logo">
@@ -25,65 +26,102 @@
     </button>
   </div>
   <div>
+    
     <div class="button-group">
       <!-- { if } -->
         <a href="{% url 'authe:signup' %}" class="button">Регистрация</a>
       <!-- { endif } -->
         <a href="{% url 'authe:signin' %}" class="button">Вход</a>
     </div>
-
   </div>
 </header>
 
-<section class="main">
-  <div class="blogs">
-      <div class="com-blog">
-          <div class="main-info"> 
-              {% if newblog.image %}
-              <img src="{{ newblog.image.url }}" alt="comment-img" class="comment-img">
-              {% endif %}
-          </div>
-          <h2 id="blog-name">{{ newblog.name }}</h2>
-              <p id="description">{{ newblog.description }}</p>
-              <time id="blog-date">{{ newblog.date }}</time>
-              <a href="" id="blog-category">{{ newblog.category }}</a>
-              <hr>
+<section class="container page">
+  <div class="page-content">
+    <h2 class="page-title">Блоги по программированию</h2>
+        <p class="page-desc">Популярные и лучшие публикации по программированию для начинающих
+   и профессиональных программистов и IT-специалистов.</p>
+    <div class="blogs">
+      <div class="blog-item">
+        {% if newblog.image %}
+        <img class="blog-item--img" src="{{ newblog.image.url }}" alt="">
+        {% endif %}
+          <div class="blog-info">
+          <span class="link">
+            <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
+            {{ newblog.date}}
+          </span>
+          
+          <!-- <a class="link">
+            <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+            4
+          </a> -->
+          <span class="link">
+            <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
+            {{ newblog.category }}
+          </span>
+          <a class="link">
+            <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
+            {{ newblog.uesername }}
+          </a>
+        </div>
+
+        <div class="blog-header">
+          <h3>{{ newblog.name }}</h3>
+        </div>
+        <p class="blog-desc">
+          {{ newblog.description }}
+        </p>
       </div>
+    </div>
+
+        <div class="comments">
+            <h2>
+                2 комментариея
+            </h2>
+
+            <div class="comment">
+              {% for c in comments %}
+                <div class="comment-header">
+                    <img src="{% static 'decode_blog/images/avatar.png' %}" alt="">
+                    {{ c.user }}
+                    {{ c.date }}
+                </div>
+                <p>
+                {{ c.text }}
+                </p>
+            </div>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+                      <a href="{% url 'decode_blog:cmadd' %}" id="button-com">Добавить комментарий</a>
+                  {% else %}
+                      <a href="{% url 'authe:signin' %}" id="button-come">SignIn</a>
+                  {% endif %}
+
+            <!-- <span class="comment-add">
+                <textarea name="" class="comment-textarea" placeholder="Введит текст комментария"></textarea>
+                <button class="button">Отправить</button>
+            </span> -->
+        </div>
   </div>
-  <div class="categories">
-      <h2 id="categories-name">Категории</h2>
-      {% if category_id == 0 %}
-          <a href="{% url 'decode_blog:home' %}" class="selected-ctgr">Все товары</a>
-      {% else %}
-          <a href="{% url 'decode_blog:home' %}">Все Блоги</a>
-      {% endif %}
 
-      {% for ctgr in categories %}
-          {% if category_id == ctgr.id %}
-              <a href="{% url 'decode_blog:category' ctgr.id %}" class="selected-ctgr">{{ctgr.name}}</a>
-          {% else %}
-              <a href="{% url 'decode_blog:category' ctgr.id %}">{{ctgr.name}}</a>
-          {% endif %}
-      {% endfor %}    
-</section>
-
-<section class="main-3">
-  <div class="comm-details">
-      {% for c in comments %}
-          <div class="comment">
-              <div class="comm-detail">
-                  <p id="user">{{ c.user }};</p> 
-                  <p>{{ c.date }}</p>
-              </div>
-              <p id="text">{{ c.text }}</p>
-          </div>
-      </div>
-      {% endfor %}
-      {% if request.user.is_authenticated %}
-          <a href="{% url 'decode_blog:cmadd' %}" id="button-com">Добавить комментарий</a>
-      {% else %}
-          <a href="{% url 'authe:signin' %}" id="button-come">SignIn</a>
-      {% endif %}
-</section>
+<div class="page-info">
+    <div class="page-header">
+            <h2>Категории</h2>
+        </div>
+        <a href="" class="categories">Прогнозы в IT</a>
+        <a href="" class="categories">Веб-разработка</a>
+        <a href="" class="categories">Мобильная разработка</a>
+        <a href="" class="categories">Фриланс</a>
+        <a href="" class="categories">Алгоритмы</a>
+        <a href="" class="categories">Тестирование IT систем</a>
+        <a href="" class="categories">Разработка игр</a>
+        <a href="" class="categories">Дизайн и юзабилити</a>
+        <a href="" class="categories">Искусственный интеллект</a>
+        <a href="" class="categories">Машинное обучение</a>
+       
+  </div>
+</section>  
 </body>
 </html>
+
