@@ -7,19 +7,15 @@ from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
 # from django.contrib.auth.models import User
 from .forms import *
-
 import sys
 sys.path.append("..")
 from decode_blog.models import NewBlog
-
 
 # Create your views here.
 
 menu = [
     {'title': 'Decode blog', 'url': 'decode_blog:Home'},
 ]
-
-
 
 class SignUpUser(CreateView):
     form_class = SignUpUserForm
@@ -59,7 +55,7 @@ class SignInUser(LoginView):
     
 def signout_user(request):
     logout(request)
-    return redirect('authe:signin')
+    return redirect('decode_blog:home')
 
 
 

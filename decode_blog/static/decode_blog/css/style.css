@@ -361,3 +361,7 @@ html {
 .page-info a {
     padding: 10px ;
 }
+
+.display-form {
+    display: flex;
+}

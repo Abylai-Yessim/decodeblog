@@ -26,10 +26,13 @@
       </div>
       <div>
         <div class="button-group">
-          <!-- { if } -->
+          {% if request.user.is_authenticate %}
             <a href="{% url 'authe:signup' %}" class="button">Регистрация</a>
-          <!-- { endif } -->
             <a href="{% url 'authe:signin' %}" class="button">Вход</a>
+          {% else %}
+              <a href="{% url 'authe:profile' %}" class="button">Профиль</a>
+              <a href="{% url 'authe:signout' %}" class="button">Выход</a>
+          {% endif %}
         </div>
     
       </div>

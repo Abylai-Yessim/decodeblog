@@ -28,10 +28,13 @@
   <div>
     
     <div class="button-group">
-      <!-- { if } -->
+      {% if request.user.is_authenticate %}
         <a href="{% url 'authe:signup' %}" class="button">Регистрация</a>
-      <!-- { endif } -->
         <a href="{% url 'authe:signin' %}" class="button">Вход</a>
+      {% else %}
+          <a href="{% url 'authe:profile' %}" class="button">Профиль</a>
+          <a href="{% url 'authe:signout' %}" class="button">Выход</a>
+      {% endif %}
     </div>
   </div>
 </header>
@@ -46,6 +49,12 @@
         {% if newblog.image %}
         <img class="blog-item--img" src="{{ newblog.image.url }}" alt="">
         {% endif %}
+        <div class="blog-header">
+          <h3>{{ newblog.name }}</h3>
+        </div>
+        <p class="blog-desc">
+          {{ newblog.description }}
+        </p>
           <div class="blog-info">
           <span class="link">
             <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
@@ -62,32 +71,26 @@
           </span>
           <a class="link">
             <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
-            {{ newblog.uesername }}
+            {{ newblog.author }}
           </a>
         </div>
 
-        <div class="blog-header">
-          <h3>{{ newblog.name }}</h3>
-        </div>
-        <p class="blog-desc">
-          {{ newblog.description }}
-        </p>
+        
       </div>
     </div>
 
         <div class="comments">
             <h2>
-                2 комментариея
+                {{ comments.count }} комментарий
             </h2>
-
+            {% for c in comments %}
             <div class="comment">
-              {% for c in comments %}
+              
                 <div class="comment-header">
                     <img src="{% static 'decode_blog/images/avatar.png' %}" alt="">
                     {{ c.user }}
-                    {{ c.date }}
                 </div>
-                <p>
+                <p class="comment-warning">
                 {{ c.text }}
                 </p>
             </div>
@@ -95,14 +98,17 @@
             {% if request.user.is_authenticated %}
                       <a href="{% url 'decode_blog:cmadd' %}" id="button-com">Добавить комментарий</a>
                   {% else %}
-                      <a href="{% url 'authe:signin' %}" id="button-come">SignIn</a>
+                      <a href="{% url 'authe:signin' %}" id="button-com">SignIn</a>
                   {% endif %}
 
-            <!-- <span class="comment-add">
-                <textarea name="" class="comment-textarea" placeholder="Введит текст комментария"></textarea>
-                <button class="button">Отправить</button>
-            </span> -->
+            <form class="comment-add" action="{% url 'decode_blog:testcomadd' %}" method="post">
+              {% csrf_token %}
+                <textarea name="comment-text" class="comment-textarea" placeholder="Введит текст комментария"></textarea>
+                <input type="hidden" name="blog_id" value="{{ newblog.id }}">
+                <button type="submit" class="button">Отправить</button>
+            </form>
         </div>
+      
   </div>
 
 <div class="page-info">
@@ -118,8 +124,7 @@
         <a href="" class="categories">Разработка игр</a>
         <a href="" class="categories">Дизайн и юзабилити</a>
         <a href="" class="categories">Искусственный интеллект</a>
-        <a href="" class="categories">Машинное обучение</a>
-       
+        <a href="" class="categories">Машинное обучение</a>   
   </div>
 </section>  
 </body>

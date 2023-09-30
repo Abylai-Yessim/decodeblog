@@ -45,7 +45,10 @@
     display: block;
     padding: 25px;
     border-radius: 4px;
-    margin-top: 30px;
+    margin-left: 10px;
+    width: 70%;
+    height: 70px;
+    
 }
 
 .comment-warning a {
@@ -69,7 +72,7 @@
 
 .comment  {
     margin-top: 20px;
-    border: 3px solid black;
+    border-top: 1px solid #c1c1c1;
 }
 
 .comm-detail {
@@ -92,7 +95,8 @@
     border: rgb(69, 69, 247);
     border-radius: 5px;
     color: white;
-    background-color: rgb(69, 69, 247)
+    background-color:#00A2DC;
+    text-decoration: none;
 }
 
 .link a {

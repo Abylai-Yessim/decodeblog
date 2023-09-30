@@ -2,11 +2,13 @@ from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
+from rest_framework.views import APIView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.response import Response
 from rest_framework.decorators import action 
 from rest_framework.viewsets import ModelViewSet
+from django.contrib.auth.models import User
 # from .models import Newblog 
 from .models import *
 from .forms import *
@@ -29,6 +31,7 @@ def search_action(request):
 
     return render(request, "authe/profile.html", {
         'posts': posts,
+        'menu': menu,
     })
     
 
@@ -40,7 +43,7 @@ def search_h(request):
         pos = NewBlog.objects.all()
 
     return render(request, 'decode_blog/home.html', {
-        'pos': pos,
+        'newblogs': pos,
     })
     
 
@@ -191,3 +194,14 @@ class AddComment(LoginRequiredMixin, CreateView):
 #     }
 
 #     return render(request, 'decode_blog/home.html', context=data) 
+
+class CreateComment(APIView):
+    def post(self, request):
+        message_text = request.data['comment-text']
+        blog_id = request.data['blog_id']
+        newblog = NewBlog.objects.get(id=blog_id)
+        user = User.objects.get(id=request.user.id)
+        new_comment = Comment.objects.create(text=message_text, blog=newblog, user=user)
+        new_comment.save()
+
+        return redirect('decode_blog:comments-blog', blog_id)
