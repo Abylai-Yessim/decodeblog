@@ -12,6 +12,7 @@ urlpatterns = [
     # path('comment/', views.comment, name='comment'),
     # path('comment_details/', views.comment_details, name='comment_details'),
     path('newblog/', views.DecodeAddBlog.as_view(), name='newblog'),
+    path('edit/<int:pk>/', views.DecodeEditBlog.as_view(), name='edit_blog'),
     path('cmadd/', views.AddComment.as_view(), name='cmadd'),
     path('commentview/<int:blog_id>/', views.BlogDetail.as_view(), name='comments-blog'),
     path('search/', views.search_action, name='search_action'),

@@ -26,6 +26,13 @@ class AddBlogForm(forms.ModelForm):
         self.instance.author = author
         return super().save(commit)
 
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['name', 'image', 'category', 'description', 'date']  
+
+
+
 class CommentForm(forms.ModelForm):
      class Meta:
         model = Comment

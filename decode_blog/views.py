@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import UpdateView, DetailView, CreateView
 from rest_framework.views import APIView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -69,10 +69,18 @@ class DecodeAddBlog(CreateView):
         context['menu'] = menu
 
         return context
-    
 
-    
-    
+class DecodeEditBlog(UpdateView):
+    model = Blog
+    form_class = BlogForm
+    template_name = 'decode_blog/edit_blog.html'  # Создайте шаблон edit_blog.html
+    success_url = reverse_lazy('decode_blog:home')   
+     
+    def get_object(self, queryset=None):
+        # Получаем объект блога для редактирования, используя параметр pk из URL
+        return Blog.objects.get(pk=self.kwargs['pk'])
+
+
 class BlogDetail(DetailView):
     model = NewBlog
     template_name = 'decode_blog/comment.html'
@@ -86,7 +94,6 @@ class BlogDetail(DetailView):
         context['menu'] = menu
         return context
 
-    
 class BlogViewSet(ModelViewSet):
     queryset = NewBlog.objects.all()
     serializer_class = BlogSerializer

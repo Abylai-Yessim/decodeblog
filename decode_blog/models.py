@@ -3,6 +3,7 @@ import uuid
 import datetime
 from django.contrib.auth.models import User
 
+
 def uniq_name_upload(instance, filename):
     new_file_name = f"{uuid.uuid4()}.{filename.split('.')[-1]}"
     return f'img/{new_file_name}'
@@ -26,13 +27,21 @@ class NewBlog(models.Model):
     description = models.TextField(null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.datetime.today())
-    
+
     class Meta:
         verbose_name = 'Newlog'
         verbose_name_plural = 'NewBlogs'
 
     def __str__(self):
         return self.name
+
+
+class Blog(models.Model):
+    name = models.CharField(max_length=100, null=False, default="")
+    image = models.ImageField(blank=True, upload_to=uniq_name_upload)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    description = models.TextField(null=False)
+    date = models.DateTimeField(default=datetime.datetime.today())
 
 
 
