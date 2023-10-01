@@ -28,9 +28,15 @@ class AddBlogForm(forms.ModelForm):
 
 class BlogForm(forms.ModelForm):
     class Meta:
-        model = Blog
-        fields = ['name', 'image', 'category', 'description', 'date']  
+        model = EditBlog
+        fields = ['name', 'image', 'category', 'description', 'date']
 
+    def save(self, commit=True):
+        blog = super().save(commit=False)
+        # Выполните любую дополнительную логику здесь, если это необходимо
+        if commit:
+            blog.save()
+        return blog
 
 
 class CommentForm(forms.ModelForm):

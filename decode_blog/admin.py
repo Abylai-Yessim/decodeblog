@@ -15,4 +15,7 @@ class BlogAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user','text', 'date', 'blog_id')
 
+class EditBlogAdmin(admin.ModelAdmin):
+    list_display = ('name', 'image', 'category', 'description', 'date')
+
    

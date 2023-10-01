@@ -71,14 +71,19 @@ class DecodeAddBlog(CreateView):
         return context
 
 class DecodeEditBlog(UpdateView):
-    model = Blog
+    model = EditBlog
     form_class = BlogForm
     template_name = 'decode_blog/edit_blog.html'  # Создайте шаблон edit_blog.html
-    success_url = reverse_lazy('decode_blog:home')   
-     
+    success_url = reverse_lazy('decode_blog:home')
+
     def get_object(self, queryset=None):
-        # Получаем объект блога для редактирования, используя параметр pk из URL
-        return Blog.objects.get(pk=self.kwargs['pk'])
+        return EditBlog.objects.get(pk=self.kwargs['pk'])
+
+    def form_valid(self, form):
+        # Вызовите метод save() формы для сохранения изменений
+        form.save()
+        return super().form_valid(form)
+
 
 
 class BlogDetail(DetailView):
