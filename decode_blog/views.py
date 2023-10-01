@@ -1,7 +1,8 @@
 from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic import UpdateView, DetailView, CreateView
+from django.views.generic import UpdateView, DetailView, CreateView, DeleteView
+from django.views.generic.edit import UpdateView, DeleteView
 from rest_framework.views import APIView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,6 +11,8 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.models import User
 # from .models import Newblog 
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from .models import *
 from .forms import *
 from .serializer import *
@@ -83,6 +86,17 @@ class DecodeEditBlog(UpdateView):
         # Вызовите метод save() формы для сохранения изменений
         form.save()
         return super().form_valid(form)
+
+
+
+def delete_blog(request, blog_id):
+    try:
+        blog = get_object_or_404(NewBlog, pk=blog_id)
+        blog.delete()
+        return JsonResponse({'success': True})
+    except NewBlog.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Blog not found'})
+
 
 
 

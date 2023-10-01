@@ -55,7 +55,7 @@
           Еще
           <ul class="dropdown">
             <li> <a href="{% url 'decode_blog:edit_blog' pk=n.pk %}">Редактировать</a> </li>
-            <li><a href="" class="danger">Удалить</a></li>
+            <li><a href="{% url 'decode_blog:delete_blog' n.id %}" class="danger">Удалить</a></li>
           </ul>
         </span>
 
