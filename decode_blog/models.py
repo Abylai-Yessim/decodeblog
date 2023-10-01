@@ -36,8 +36,8 @@ class NewBlog(models.Model):
         return self.name
 
 
-class EditBlog(models.Model):
-    name = models.CharField(max_length=100, null=False, default="")
+class EditBlogModel(models.Model):
+    name = models.CharField(max_length=100,)
     image = models.ImageField(blank=True, upload_to=uniq_name_upload)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     description = models.TextField(null=False)

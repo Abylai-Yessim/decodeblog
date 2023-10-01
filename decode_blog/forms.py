@@ -28,7 +28,7 @@ class AddBlogForm(forms.ModelForm):
 
 class BlogForm(forms.ModelForm):
     class Meta:
-        model = EditBlog
+        model = EditBlogModel
         fields = ['name', 'image', 'category', 'description', 'date']
 
     def save(self, commit=True):

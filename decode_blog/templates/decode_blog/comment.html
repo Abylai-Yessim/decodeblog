@@ -96,7 +96,7 @@
             </div>
             {% endfor %}
             {% if request.user.is_authenticated %}
-                      <a href="{% url 'decode_blog:cmadd' %}" id="button-com">Добавить комментарий</a>
+                      <!-- <a href="{% url 'decode_blog:cmadd' %}" id="button-com">Добавить комментарий</a> -->
                   {% else %}
                       <a href="{% url 'authe:signin' %}" id="button-com">SignIn</a>
                   {% endif %}
