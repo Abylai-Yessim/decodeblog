@@ -7,8 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- ... Ваш HTML-код ... -->
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
       const deleteButtons = document.querySelectorAll('.delete-blog-button');
@@ -37,8 +35,6 @@
           }
         });
       });
-    
-      // Функция для получения значения CSRF-токена из куков
       function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {

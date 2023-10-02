@@ -36,19 +36,19 @@ class NewBlog(models.Model):
         return self.name
 
 
-class EditBlogModel(models.Model):
-    name = models.CharField(max_length=100,)
-    image = models.ImageField(blank=True, upload_to=uniq_name_upload)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    description = models.TextField(null=False)
-    date = models.DateTimeField(default=datetime.datetime.today())
+# class EditBlogModel(models.Model):
+#     name = models.CharField(max_length=100,)
+#     image = models.ImageField(blank=True, upload_to=uniq_name_upload)
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+#     description = models.TextField(null=False)
+#     date = models.DateTimeField(default=datetime.datetime.today())
 
-    class Meta:
-        verbose_name = 'Editlog'
-        verbose_name_plural = 'EditBlogs'
+#     class Meta:
+#         verbose_name = 'Editlog'
+#         verbose_name_plural = 'EditBlogs'
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 class Comment(models.Model):

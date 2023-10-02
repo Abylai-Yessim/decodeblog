@@ -26,17 +26,17 @@ class AddBlogForm(forms.ModelForm):
         self.instance.author = author
         return super().save(commit)
 
-class BlogForm(forms.ModelForm):
-    class Meta:
-        model = EditBlogModel
-        fields = ['name', 'image', 'category', 'description', 'date']
+# class BlogForm(forms.ModelForm):
+#     class Meta:
+#         model = EditBlogModel
+#         fields = ['name', 'image', 'category', 'description', 'date']
 
-    def save(self, commit=True):
-        blog = super().save(commit=False)
-        # Выполните любую дополнительную логику здесь, если это необходимо
-        if commit:
-            blog.save()
-        return blog
+#     def save(self, commit=True):
+#         blog = super().save(commit=False)
+#         # Выполните любую дополнительную логику здесь, если это необходимо
+#         if commit:
+#             blog.save()
+#         return blog
 
 
 class CommentForm(forms.ModelForm):

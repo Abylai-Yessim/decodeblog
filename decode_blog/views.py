@@ -74,26 +74,25 @@ class DecodeAddBlog(CreateView):
         return context
 
 class EditBlog(UpdateView):
-    model = EditBlogModel
-    form_class = BlogForm
+    model = NewBlog
+    form_class = AddBlogForm
     template_name = 'decode_blog/edit-blog.html'  
     success_url = reverse_lazy('decode_blog:home')
 
     def get_object(self):
         blog_id = self.kwargs['blog_id']
-        return EditBlogModel.objects.get(pk=blog_id)
+        return NewBlog.objects.get(pk=blog_id)
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
 
 
-
 def delete_blog(request, blog_id):
     try:
         blog = get_object_or_404(NewBlog, pk=blog_id)
         blog.delete()
-        return JsonResponse({'success': True})
+        return redirect('decode_blog:home')  
     except NewBlog.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Blog not found'})
 

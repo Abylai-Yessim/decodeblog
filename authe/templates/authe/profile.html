@@ -68,8 +68,8 @@
                 <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
                 Еще
                 <ul class="dropdown">
-                  <li> <a href="{% url 'decode_blog:newblog' %}">Редактировать</a> </li>
-                  <li><a href="" class="danger">Удалить</a></li>
+                  <li> <a href="{% url 'decode_blog:edit-blog' newblog.id %}">Редактировать</a> </li>
+                  <li><a href="{% url 'decode_blog:delete_blog' newblog.id %}" class="danger">Удалить</a></li>
                 </ul>
               </span>
     
