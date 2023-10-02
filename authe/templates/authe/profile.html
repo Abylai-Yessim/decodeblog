@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{% static 'decode_blog/css/user.css' %}">
   <link rel="stylesheet" href="{% static 'decode_blog/css/newblog.css' %}">
   <link rel="stylesheet" href="{% static 'authe/css/signup.css' %}">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/comment.css' %}">
 </head>
 <body>
     
@@ -57,47 +58,53 @@
         </div>
 
         <div class="blogs">
-          {% for newblog in posts %}
+          {% for n in newblogs %}
           <div class="blog-item">
-            {% if newblog.image %}
-              <img class="blog-item--img" src="{{ newblog.image.url }}" alt="">
+            {% if n.image %}
+              <img class="blog-item--img" src="{{ n.image.url }}" alt="">
             {% endif %}
             <div class="blog-header">
-              <p class="blog-header-p">{{ newblog.name }}</p>
+              <p class="blog-header-p">{{ n.name }}</p>
               <span class="link">
                 <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
                 Еще
                 <ul class="dropdown">
-                  <li> <a href="{% url 'decode_blog:edit-blog' newblog.id %}">Редактировать</a> </li>
-                  <li><a href="{% url 'decode_blog:delete_blog' newblog.id %}" class="danger">Удалить</a></li>
+                  <li> <a href="{% url 'authe:model-edit-blog' n.id %}">Редактировать</a> </li>
+                  <li><a href="{% url 'authe:model_delete_blog' n.id %}" class="danger">Удалить</a></li>
                 </ul>
               </span>
-    
+      
             </div>
             <p class="blog-desc">
-              {{ newblog.description }}
+              {{ n.description }}
             </p>
-    
+      
             <div class="blog-info">
               <span class="link">
                 <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
-                {{ newblog.date }}
+                {{ n.date }}
               </span>
-              <span class="link">
-                <img src="{% static 'decode_blog/images/visibility.svg' %}" alt="">
-                21
-              </span>
+              
+              <div class="blog-info">
+                <span class="link">
+                <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
+                <a href="{% url 'decode_blog:comments-blog' n.id %}" class="blogs-comments">Посмотреть комментарии</a>
+                </span>
+              </div>
+      
               <span class="link">
                 <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
-                {{ newblog.category }}
+                {{ n.category }}
               </span>
+      
               <a class="link">
                 <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
-               {{ user.username }}
+               {{ n.author }}
               </a>
             </div>
-
+      
            
+            
           </div>
           {% endfor %}
         </div>
@@ -110,9 +117,9 @@
 			<h1>
       {{ user.username }}
       </h1>
-			<h2>В основном пишу про веб - разработку, на React & Redux</h2>
-			<p>285 постов за все время</p>
-			<a href="{% url 'decode_blog:newblog' %}" class="button">Редактировать</a>
+			<h2>{{ user.profile.bio }}</h2>
+			<!-- <p>285 постов за все время</p> -->
+			<a href="{% url 'authe:edit_profile' %}" class="button">Редактировать</a>
 		</div>
 	</div>
 

@@ -40,7 +40,7 @@
   <section class="container page">
     <div class="auth-form">
             <h1>Регистрация</h1>
-            <form  action="" method="POST" class="authe-form">
+            <form  action="" method="POST" class="authe-form" enctype="multipart/form-data">
                 {% csrf_token %}
     
                 {{ form.as_p }}

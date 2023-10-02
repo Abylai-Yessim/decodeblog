@@ -1,16 +1,27 @@
 from typing import Set
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from .forms import ProfileEditForm  # Import your profile edit form
 # from django.contrib.auth.models import User
 from .forms import *
 import sys
 sys.path.append("..")
 from decode_blog.models import NewBlog
-
+from decode_blog.forms import *
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
+from rest_framework import mixins
+from .models import *
+from .forms import *
+from .serializers import *
 # Create your views here.
 
 menu = [
@@ -66,9 +77,69 @@ def profile(request):
     data = {
         'title': 'Профиль',
         'menu': menu,
-        'posts': NewBlog.objects.filter(author_id=request.user.id)
+        'newblogs': NewBlog.objects.filter(author_id=request.user.id)
     }
 
     return render(request, 'authe/profile.html', context=data)    
 
 
+class ModelEditBlog(UpdateView):
+    model = NewBlog
+    form_class = AddBlogForm
+    template_name = 'authe/model-edit-blog.html'  
+    success_url = reverse_lazy('authe:profile')
+
+    def get_object(self):
+        blog_id = self.kwargs['blog_id']
+        return NewBlog.objects.get(pk=blog_id)
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+def model_delete_blog(request, blog_id):
+    try:
+        blog = get_object_or_404(NewBlog, pk=blog_id)
+        blog.delete()
+        return redirect('authe:profile')  
+    except NewBlog.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Blog not found'})
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('authe:profile')
+        else:
+            print(form.errors)  
+    else:
+        form = ProfileEditForm(instance=request.user)
+
+    return render(request, 'authe/edit_profile.html', {'form': form})
+
+
+
+
+# class UserDetailAPIView(RetrieveAPIView):
+#     def get_queryset(self):
+#         return User.objects.get(id=self.request.user.id)
+    
+# class UserViewSet(GenericViewSet, mixins.CreateModelMixin,):
+#     def get_queryset(self):
+#         if self.action == 'retrieve':
+#             return User.objects.get(id=self.request.user.id)
+#         return User.objects.all()
+
+#     def get_serializer_class(self):
+#         if self.action == 'create':
+#             return UserCreateSerializer
+#         elif self.action == 'retrieve':
+#             return UserRetrieveSerializer
+        
+#     def retrieve(self, request, *args, **kwargs):
+#         instance = self.get_queryset()
+#         serializer = self.get_serializer(instance)
+#         return Response(serializer.data)

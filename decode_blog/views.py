@@ -63,7 +63,7 @@ def home(request):
 class DecodeAddBlog(CreateView):
     form_class = AddBlogForm
     template_name = 'decode_blog/newblog.html'
-    success_url = reverse_lazy('decode_blog:home')
+    success_url = reverse_lazy('authe:profile')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
