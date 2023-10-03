@@ -365,3 +365,17 @@ html {
 .display-form {
     display: flex;
 }
+
+.categories a {
+    text-decoration: none;
+    color: #007BFF;
+    width: 100%;
+    border-bottom:2px solid #a9a9a9 ;
+    font-size: 20px;
+    transition: 2s;
+}
+
+.categories a:hover{
+    border-bottom: 2px solid;
+}
+

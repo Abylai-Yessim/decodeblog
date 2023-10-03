@@ -18,7 +18,7 @@ class AddBlogForm(forms.ModelForm):
         queryset=Category.objects.all(),
         to_field_name='name',
         required=True,  
-        widget=forms.Select(attrs={'class': 'form-control input'})
+        widget=forms.Select(attrs={'class': 'form-control input '})
     )
 
     def save(self, commit: bool = ...):

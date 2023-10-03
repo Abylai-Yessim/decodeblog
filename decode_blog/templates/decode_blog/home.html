@@ -97,22 +97,23 @@
 
       
       <div class="page-info">
-            <div class="page-header">
+          <div class="page-header">
                 <h2>Категории</h2>
-                {% if category_id == 0 %}
+              </div> 
+                  {% if category_id == 0 %}
                 <a href="{% url 'decode_blog:home' %}" class="categories"></a>
             {% else %}
-                <a href="{% url 'decode_blog:home' %}">Все Блоги</a>
+                <a href="{% url 'decode_blog:home' %}" class="categories">Все Блоги</a>
             {% endif %}
 
             {% for ctgr in categories %}
-                {% if category_id == ctgr.id %}
-                    <a href="{% url 'decode_blog:category' ctgr.id %}" class="categories">{{ctgr.name}}</a>
+                  {% if category_id == ctgr.id %}
+                    <a href="{% url 'decode_blog:category' ctgr.id %}" class="categories" >{{ctgr.name}}</a>
                 {% else %}
-                    <a href="{% url 'decode_blog:category' ctgr.id %}">{{ctgr.name}}</a>
+                    <a href="{% url 'decode_blog:category' ctgr.id %}" class="categories" >{{ctgr.name}}</a>
                 {% endif %}
             {% endfor %}   
-            
+          
       </div>
     </section>  
     

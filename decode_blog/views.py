@@ -49,17 +49,17 @@ def search_h(request):
         'newblogs': pos,
     })
     
-
 def home(request):
     newblogs = NewBlog.objects.all()
+    categories = Category.objects.all()  
 
     data = {
         'menu': menu,
         'title': 'Главная страница',
         'newblogs': newblogs,
+        'categories': categories,  
     }
     return render(request, 'decode_blog/home.html', context=data)
-
 class DecodeAddBlog(CreateView):
     form_class = AddBlogForm
     template_name = 'decode_blog/newblog.html'
@@ -181,11 +181,11 @@ class CategoriesBlog(ListView):
         return context
     
 def site_category(request, category_id):
-    blogs = NewBlog.objects.filter(category_id=category_id)
+    newblogs = NewBlog.objects.filter(category_id=category_id)
     categories = Category.objects.all()
 
     data = {
-        'blogs':blogs,
+        'newblogs': newblogs,
         'categories':categories,
         'menu':menu,
         'title':'Статьи',
