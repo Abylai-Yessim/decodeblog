@@ -6,7 +6,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from .forms import ProfileEditForm  # Import your profile edit form
 # from django.contrib.auth.models import User
 from .forms import *
 import sys
@@ -15,10 +14,10 @@ from decode_blog.models import NewBlog
 from decode_blog.forms import *
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
-from rest_framework import mixins
+# from rest_framework.generics import RetrieveAPIView
+# from rest_framework.response import Response
+# from rest_framework.viewsets import GenericViewSet
+# from rest_framework import mixins
 from .models import *
 from .forms import *
 from .serializers import *
@@ -107,18 +106,16 @@ def model_delete_blog(request, blog_id):
         return JsonResponse({'success': False, 'error': 'Blog not found'})
 
 
+
 def edit_profile(request):
     if request.method == 'POST':
-        form = ProfileEditForm(request.POST, request.FILES, instance=request.user)
+        form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('authe:profile')
-        else:
-            print(form.errors)  
     else:
-        form = ProfileEditForm(instance=request.user)
+        form = UserProfileForm(instance=request.user.profile)
 
-    return render(request, 'authe/edit_profile.html', {'form': form})
+    return render(request, 'edit_profile.html', {'form': form})
 
 
 

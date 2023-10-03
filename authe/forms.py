@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django import forms
 from .models import UserProfile 
 
 class SignUpUserForm(UserCreationForm):
@@ -30,12 +29,12 @@ class SignInUserForm(UserCreationForm):
 
 
 
-class ProfileEditForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['bio', 'avatar']  
 
     def __init__(self, *args, **kwargs):
-        super(ProfileEditForm, self).__init__(*args, **kwargs)
+        super(UserProfileForm, self).__init__(*args, **kwargs)
 
         self.fields['bio'].widget = forms.Textarea(attrs={'rows': 4})
