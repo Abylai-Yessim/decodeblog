@@ -52,5 +52,10 @@
   button:hover {
     background-color: #0056b3;
   }
+.user-profile--ava{
+  border-radius: 100%;
+  height: 130px;
+  width: 65%;
+}
 
   

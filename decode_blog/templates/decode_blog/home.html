@@ -54,7 +54,7 @@
           <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
           Еще
           <ul class="dropdown">
-            <li> <a href="{% url 'decode_blog:edit-blog' n.id %}">Редактировать</a> </li>
+            <li> <a href="{% url 'decode_blog:edit_blog' n.id %}">Редактировать</a> </li>
             <li><a href="{% url 'decode_blog:delete_blog' n.id %}" class="danger">Удалить</a></li>
           </ul>
         </span>
@@ -99,18 +99,19 @@
       <div class="page-info">
             <div class="page-header">
                 <h2>Категории</h2>
-            </div>
-            <a href="" class="categories">Прогнозы в IT</a>
-            <a href="" class="categories">Веб-разработка</a>
-            <a href="" class="categories">Мобильная разработка</a>
-            <a href="" class="categories">Фриланс</a>
-            <a href="" class="categories">Алгоритмы</a>
-            <a href="" class="categories">Тестирование IT систем</a>
-            <a href="" class="categories">Разработка игр</a>
-            <a href="" class="categories">Дизайн и юзабилити</a>
-            <a href="" class="categories">Искусственный интеллект</a>
-            <a href="" class="categories">Машинное обучение</a>
-            
+                {% if category_id == 0 %}
+                <a href="{% url 'decode_blog:home' %}" class="categories"></a>
+            {% else %}
+                <a href="{% url 'decode_blog:home' %}">Все Блоги</a>
+            {% endif %}
+
+            {% for ctgr in categories %}
+                {% if category_id == ctgr.id %}
+                    <a href="{% url 'decode_blog:category' ctgr.id %}" class="categories">{{ctgr.name}}</a>
+                {% else %}
+                    <a href="{% url 'decode_blog:category' ctgr.id %}">{{ctgr.name}}</a>
+                {% endif %}
+            {% endfor %}   
             
       </div>
     </section>  

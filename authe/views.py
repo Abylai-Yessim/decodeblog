@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
+from .forms import ProfileEditForm  # Import your profile edit form
 # from django.contrib.auth.models import User
 from .forms import *
 import sys
@@ -14,10 +15,10 @@ from decode_blog.models import NewBlog
 from decode_blog.forms import *
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-# from rest_framework.generics import RetrieveAPIView
-# from rest_framework.response import Response
-# from rest_framework.viewsets import GenericViewSet
-# from rest_framework import mixins
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
+from rest_framework import mixins
 from .models import *
 from .forms import *
 from .serializers import *
@@ -73,10 +74,18 @@ def profile(request):
     if not request.user.is_authenticated:
         return redirect('authe:signin')
     
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+    # создание профиля пользователя, если он не существует
+        user_profile = UserProfile.objects.create(user=request.user)
+
     data = {
         'title': 'Профиль',
         'menu': menu,
-        'newblogs': NewBlog.objects.filter(author_id=request.user.id)
+        'newblogs': NewBlog.objects.filter(author_id=request.user.id),
+        # передаем user_profile для аватарки
+        'user_profile': user_profile
     }
 
     return render(request, 'authe/profile.html', context=data)    
@@ -105,17 +114,45 @@ def model_delete_blog(request, blog_id):
     except NewBlog.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Blog not found'})
 
-
-
+# ИЗМЕНЕНО
 def edit_profile(request):
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-    else:
-        form = UserProfileForm(instance=request.user.profile)
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+    # Создание профиля пользователя, если он не существует
+        user_profile = UserProfile.objects.create(user=request.user)
 
-    return render(request, 'edit_profile.html', {'form': form})
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_username = form.cleaned_data['username']
+
+            # проверка username
+            if new_username != request.user.username:
+                request.user.username = new_username
+                request.user.save()
+
+            # проверка фотки
+            if 'avatar' in request.FILES:
+                user_profile.avatar = request.FILES['avatar']
+                user_profile.save()
+
+            # просто bio
+            new_bio = form.cleaned_data['bio']
+            user_profile.bio = new_bio
+            user_profile.save()
+
+            return redirect('authe:profile')
+    else:
+        form = ProfileEditForm(initial={
+            'username': request.user.username,
+            'bio': user_profile.bio
+        })
+
+    return render(request, 'authe/edit_profile.html', {
+        'form': form, 
+        'user_profile': user_profile
+    })
 
 
 

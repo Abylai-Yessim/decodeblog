@@ -22,21 +22,23 @@
         <div class="edit-profile-form">
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label for="username">Username:</label>
               <input type="text" id="username" name="username" value="{{ user.username }}" required>
             </div>
+            <!--BIO-->
             <div class="form-group">
               <label for="bio">Bio:</label>
-              <textarea id="bio" name="bio">{{ user.profile.bio }}</textarea>
+              <textarea id="bio" name="bio">{% if user_profile.bio %}{{user_profile.bio}}{% else %}{% endif %}</textarea>
             </div>
+            <!--BIO-->
+            <!--AVATAR-->
             <div class="form-group">
                 <label for="avatar">Avatar:</label>
-                <input type="file" id="avatar" name="avatar">
-            </div> -->
-            {{ form.as_p }}
+                <input type="file" id="avatar" name="avatar" value="{% if user_profile.avatar %}{{user_profile.avatar}}{% else %}{% endif %}">
+            </div>
+            <!--AVATAR-->
             <button type="submit" class="button">Save Profile</button>
-            
           </form>
         </div>
       </div>
@@ -45,5 +47,5 @@
 
       </div>
     </section>
-  </body>
+  </body>
 </html>

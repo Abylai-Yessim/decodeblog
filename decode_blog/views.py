@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic import UpdateView, DetailView, CreateView, DeleteView
+from django.views.generic import UpdateView, DetailView, CreateView, DeleteView, ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from rest_framework.views import APIView
 from django.urls import reverse, reverse_lazy
@@ -76,7 +76,7 @@ class DecodeAddBlog(CreateView):
 class EditBlog(UpdateView):
     model = NewBlog
     form_class = AddBlogForm
-    template_name = 'decode_blog/edit-blog.html'  
+    template_name = 'decode_blog/edit_blog.html'  
     success_url = reverse_lazy('decode_blog:home')
 
     def get_object(self):
@@ -164,7 +164,35 @@ class AddComment(LoginRequiredMixin, CreateView):
 
         return context
     
+class CategoriesBlog(ListView):
+    model = NewBlog
+    template_name = 'decode_blog/home.html'
+    context_object_name = 'categories'
+    
 
+    def get_context_data(self, **kwargs):        
+        context = super().get_context_data(**kwargs)
+        
+        # Передача контекстных данных  #
+        context['title'] = 'Категории'
+        context['menu'] = menu
+        context['categories'] = Category.objects.all()
+
+        return context
+    
+def site_category(request, category_id):
+    blogs = NewBlog.objects.filter(category_id=category_id)
+    categories = Category.objects.all()
+
+    data = {
+        'blogs':blogs,
+        'categories':categories,
+        'menu':menu,
+        'title':'Статьи',
+        'category_id':category_id
+    }
+
+    return render(request, 'decode_blog/home.html', context=data) 
 
 # class ShowComment(DetailView):
 #     model = Comment  # Изменено на модель Comment, чтобы отображать комментарии
