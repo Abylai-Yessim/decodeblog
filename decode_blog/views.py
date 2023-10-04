@@ -57,9 +57,12 @@ def home(request):
         'menu': menu,
         'title': 'Главная страница',
         'newblogs': newblogs,
-        'categories': categories,  
+        'categories': categories,
     }
     return render(request, 'decode_blog/home.html', context=data)
+
+
+
 class DecodeAddBlog(CreateView):
     form_class = AddBlogForm
     template_name = 'decode_blog/newblog.html'
@@ -233,20 +236,7 @@ def site_category(request, category_id):
 #         context['categories'] = Category.objects.all()
 
 #         return context
-    
-# def site_category(request, category_id):
-#     blogs = NewBlog.objects.filter(category_id=category_id)
-#     categories = Category.objects.all()
 
-#     data = {
-#         'blogs':blogs,
-#         'categories':categories,
-#         'menu':menu,
-#         'title':'Статьи',
-#         'category_id':category_id
-#     }
-
-#     return render(request, 'decode_blog/home.html', context=data) 
 
 class CreateComment(APIView):
     def post(self, request):
