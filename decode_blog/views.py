@@ -216,11 +216,6 @@ def site_category(request, category_id):
 #         context['menu'] = menu
 #         return context
 
-
-
-
-
-
 # class CategoriesBlog(ListView):
 #     model = NewBlog
 #     template_name = 'decode_blog/home.html'

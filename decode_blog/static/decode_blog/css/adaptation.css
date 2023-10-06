@@ -1,0 +1,305 @@
+@media (max-width: 756.8px) {
+  .header-logo {
+    text-align: center;
+  }
+  .header-search {
+    text-align: center;
+  }
+  .button-group {
+    text-align: center;
+    display: flex;
+  }
+  .page-title {
+    font-size: 24px;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .blogs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .blog-item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .blog-item img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .blog-header-p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .blog-desc {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .blog-info {
+    font-size: 12px;
+  }
+
+  .categories {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .link {
+    display: block;
+    text-align: center;
+  }
+
+  .link img {
+    display: block;
+    margin: 0 auto 5px;
+  }
+
+  .link span {
+    display: block;
+  }
+}
+
+@media (max-width: 1005px) {
+
+  .button-login {
+    display: none; 
+  }
+  .button-registration{
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 999px) {
+  .categories-toggle {
+    display: none; 
+  }
+}
+
+@media (max-width: 1015px) {
+
+  .page-info {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .button-registration, .button-search {
+    margin-right: 20px; 
+  }
+}
+@media (max-width: 991px) {
+  .header-logo a {
+    font-size: 28px; 
+  }
+}
+
+@media (max-width: 780px) {
+  .header-logo a {
+    font-size: 28px; 
+  }
+}
+
+@media (max-width: 757px) {
+  .header-logo a {
+    font-size: 14px;
+
+  }
+}
+
+@media (max-width: 756px) {
+  .link img {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 5px; 
+  }
+}
+
+@media (max-width: 756px) {
+  .dropdown ul {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    padding: 5px 0;
+    border: 1px solid #ccc;
+  }
+
+  .dropdown li {
+    display: block;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 756px) {
+  .dropdown li {
+    font-size: 14px; 
+  }
+}
+
+@media (max-width: 767.8px) {
+  .container.page {
+    width: 100%; 
+    padding: 10px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-info a.link img {
+    max-width: 20px; 
+    max-height: 20px;
+    margin-right: 5px;
+  }
+
+  .blog-info a.link {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .link img {
+    width: 16px;
+  }
+
+  .dropdown {
+    display: none; 
+  }
+
+  .link[data-dropdown="dropdown"]:hover .dropdown {
+    display: block; 
+    position: absolute;
+    background-color: white;
+    padding: 5px;
+    z-index: 1;
+  }
+
+  .link[data-dropdown="dropdown"]:hover .edit-link,
+  .link[data-dropdown="dropdown"]:hover .delete-link {
+    display: block; 
+  }
+
+  .edit-link,
+  .delete-link {
+    display: none; 
+  }
+}
+
+@media (max-width: 768px) {
+  .header-logo a {
+    font-size: 18px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-desc {
+    font-size: 12px; 
+  }
+
+  .blog-info .link img {
+    max-width: 16px;
+    max-height: 16px; 
+  }
+
+  .blog-info .link {
+    font-size: 12px; 
+  }
+
+  .blog-item {
+    padding: 5px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 18px !important;
+  }
+
+  .page-desc {
+    font-size: 14px !important;
+  }
+
+  .categories {
+    font-size: 14px !important;
+  }
+
+  .blog-header-p {
+    font-size: 16px !important;
+  }
+
+  .blogs-comments {
+    font-size: 10px !important;
+  }
+
+  .blog-info .link,
+  .blog-info .link span {
+    font-size: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .blog-info .link,
+  .blog-info .link span {
+    margin-top: -10px;
+  }
+
+  .blog-info .link,
+  .blog-info .link span {
+    font-size: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .blog-info .link.author-text a,
+  .blog-info .link.category-text
+   {
+    font-size: 9px; 
+    font-weight: normal; 
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-info .link.date-text{
+    font-size: 6.2px;
+    font-weight: normal; 
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-desc {
+    margin-top: -19px; 
+  }
+}
+
+@media (max-width: 1000px) {
+  .user-profile {
+    text-align: center;
+  }
+
+  .user-profile h1,
+  .user-profile h2 {
+    font-size: 16px; 
+  }
+
+  .user-profile--ava {
+    width: 80px; 
+    height: 80px; 
+    margin: 0 auto; 
+    border-radius: 50%; 
+  }
+
+  .button {
+    font-size: 12px; 
+  }
+}
+
+

@@ -7,35 +7,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'decode_blog/css/comment.css' %}">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/adaptation.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
     
-    <header class="header container">
-      <div class="header-logo">
-          <a href="">Decode Blog</a>  
+  <header class="header container">
+    <div class="header-logo">
+      <a href="">Decode Blog</a>
+    </div>
+    <div class="header-search">
+      <form action="{% url 'decode_blog:search_h' %}" class="display-form">
+        <input type="search_h" class="input-search" placeholder="Поиск по блогам" name="search_h">
+        <button type="submit" class="button button-search">
+          <img src="{% static 'decode_blog/images/search.svg' %}" alt="">
+          Найти
+        </button>
+      </form>
+    </div>
+    <div>
+      <div class="button-group">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'authe:profile' %}" class="button button-registration">Профиль</a>
+        <a href="{% url 'authe:signout' %}" class="button button-login">Выход</a>
+        {% else %}
+        <a href="{% url 'authe:signup' %}" class="button button-registration">Регистрация</a>
+        <a href="{% url 'authe:signin' %}" class="button button-login">Вход</a>
+        {% endif %}
       </div>
-      <div class="header-search">
-        <form action="{% url 'decode_blog:search_h' %}" class="display-form">
-          <input type="search_h" class="input-search" placeholder="Поиск по блогам" name="search_h">
-          <button type="submit" class="button button-search">
-            <img src="{% static 'decode_blog/images/search.svg' %}" alt="">  
-            Найти
-          </button>
-        </form>
-      </div>
-      <div>
-        
-            <div class="button-group">
-              {% if request.user.is_authenticated %}
-                <a href="{% url 'authe:profile' %}" class="button">Профиль</a>
-                <a href="{% url 'authe:signout' %}" class="button">Выход</a>  
-              {% else %}
-                <a href="{% url 'authe:signup' %}" class="button">Регистрация</a>
-                <a href="{% url 'authe:signin' %}" class="button">Вход</a>
-              {% endif %}
-            </div>
-    
-      </div>
+    </div>
+  </header>
+  
+  <div class="header-categories">
+    <button class="categories-toggle">&#9776;</button>
+    <div class="categories-dropdown">
+
+      {% if category_id == 0 %}
+        <a href="{% url 'decode_blog:home' %}" class="categories">Все Блоги</a>
+      {% else %}
+        <a href="{% url 'decode_blog:home' %}" class="categories">Все Блоги</a>
+      {% endif %}
+      {% for ctgr in categories %}
+        <a href="{% url 'decode_blog:category' ctgr.id %}" class="categories">{{ ctgr.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  
+
     </header>
     <section class="container page">
       <div class="page-content">
@@ -50,14 +68,16 @@
       {% endif %}
       <div class="blog-header">
         <p class="blog-header-p">{{ n.name }}</p>
-        <span class="link">
-          <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
-          Еще
+        
+        <span class="link" data-dropdown="dropdown">
+            <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
+            Еще
           <ul class="dropdown">
-            <li> <a href="{% url 'decode_blog:edit_blog' n.id %}">Редактировать</a> </li>
-            <li><a href="{% url 'decode_blog:delete_blog' n.id %}" class="danger">Удалить</a></li>
+            <li class="edit-link"> <a href="{% url 'decode_blog:edit_blog' n.id %}">Редактировать</a> </li>
+            <li class="delete-link"><a href="{% url 'decode_blog:delete_blog' n.id %}" class="danger">Удалить</a></li>
           </ul>
         </span>
+
 
       </div>
       <p class="blog-desc">
@@ -65,7 +85,7 @@
       </p>
 
       <div class="blog-info">
-        <span class="link">
+        <span class="link  date-text">
           <img src="{% static 'decode_blog/images/date.svg' %}" alt="">
           {{ n.date }}
         </span>
@@ -73,16 +93,16 @@
         <div class="blog-info">
           <span class="link">
           <img src="{% static 'decode_blog/images/message.svg' %}" alt="">
-          <a href="{% url 'decode_blog:comments-blog' n.id %}" class="blogs-comments">Посмотреть комментарии</a>
+          <a href="{% url 'decode_blog:comments-blog' n.id %}" class="blogs-comments">Комментарий</a>
           </span>
         </div>
 
-        <span class="link">
+        <span class="link category-text">
           <img src="{% static 'decode_blog/images/forums.svg' %}" alt="">
           {{ n.category }}
         </span>
 
-        <a class="link">
+        <a class="link author-text">
           <img src="{% static 'decode_blog/images/person.svg' %}" alt="">
          {{ n.author }}
         </a>
@@ -118,6 +138,6 @@
     </section>  
     
 
-  <script src="{% static 'js/delete_blog.js' %}"></script>
+  <script src="{% static 'decode_blog/js/style.js' %}"></script>
 </body>
 </html>

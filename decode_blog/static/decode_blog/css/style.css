@@ -108,19 +108,14 @@ html {
     margin-top: -40px;
 }
 
-.button {
-    height: 50px;
-    padding: 0 15px;
+.button-group {
     display: flex;
-    align-items: center;
-    background-color: #00A2DC;
-    color: #fff;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-    text-decoration: none;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-end; 
 }
 
+.button,
 .button2 {
     height: 50px;
     padding: 0 15px;
@@ -132,15 +127,16 @@ html {
     border: none;
     outline: none;
     text-decoration: none;
-    margin-top: 7px;
-    margin-right: -40px;
+    font-size: 14px; 
 }
 
-.button:hover {
-    background-color: #00719A
+.button:hover,
+.button2:hover {
+    background-color: #00719A;
 }
 
-.button > img {
+.button > img,
+.button2 > img {
     width: 16px;
     height: 16px;
     margin-right: 10px;
@@ -153,17 +149,9 @@ html {
 
 
 
-.button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-
-}
-
-
 .blog-item--img {
     width: 100%;
-    /* margin-top: 20px; */
+
 }
 
 .blog-item--img2{
@@ -379,3 +367,57 @@ html {
     border-bottom: 2px solid;
 }
 
+.categories-dropdown {
+    display: none;
+  }
+  
+.categories-toggle {
+  background-color: #00A2DC;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px; 
+  cursor: pointer; 
+  outline: none;
+  text-decoration: none;
+  font-size: 16px; 
+
+
+
+}
+
+.categories-toggle:hover {
+  background-color: #00719A; 
+  text-decoration: underline;
+}
+  
+  .categories-toggle:focus + .categories-dropdown {
+    display: block;
+  }
+  
+  .categories-dropdown a {
+    color: #333; 
+    text-decoration: none;
+    padding: 8px 16px; 
+  }
+  
+  .categories-dropdown a:hover {
+    text-decoration: underline; 
+  }
+  
+  .button-registration,
+  .button-login {
+      background-color: #00A2DC;
+      color: #fff;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      text-decoration: none;
+      padding: 10px 20px; 
+      display: inline-block; 
+      margin-right: 10px; 
+  }
+
+  .dropdown {
+    display: none;
+  }
