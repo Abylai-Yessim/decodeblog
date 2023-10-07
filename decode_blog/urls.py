@@ -20,5 +20,8 @@ urlpatterns = [
     path('search/', views.search_action, name='search_action'),
     path('search_h/', views.search_h, name='search_h'),
     path('', include(router.urls)),
-    path('api/testcomadd/', views.CreateComment.as_view(), name='testcomadd')
+    path('api/testcomadd/', views.CreateComment.as_view(), name='testcomadd'),
+    path('edit_comment/<int:comment_id>/', views.edit_comment, name='edit_comment'),
+    path('blog_detail/<int:pk>/', views.BlogDetail.as_view(), name='blog_detail'),
+
 ]

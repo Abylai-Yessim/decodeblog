@@ -56,3 +56,5 @@ class Comment(models.Model):
     text = models.TextField(max_length=2000)
     date = models.DateTimeField(default=datetime.datetime.today())
     blog = models.ForeignKey(NewBlog, on_delete=models.CASCADE, default=1)
+
+

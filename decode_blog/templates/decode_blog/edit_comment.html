@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Профиль</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'decode_blog/css/comment.css' %}">
+</head>
+<body>
+  {% block content %}
+  <h2>Edit Comment</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+  <a href="{% url 'decode_blog:comments-blog' blog_id=comment.blog.id %}">Back to Comments</a>
+  {% endblock %}
+</body>
+</html>

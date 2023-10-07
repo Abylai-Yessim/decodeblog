@@ -62,21 +62,23 @@
    и профессиональных программистов и IT-специалистов.</p>
    <div class="blogs">
     {% for n in newblogs %}
-    <div class="blog-item">
-      {% if n.image %}
-        <img class="blog-item--img" src="{{ n.image.url }}" alt="">
-      {% endif %}
-      <div class="blog-header">
-        <p class="blog-header-p">{{ n.name }}</p>
-        
-        <span class="link" data-dropdown="dropdown">
-            <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
-            Еще
-          <ul class="dropdown">
-            <li class="edit-link"> <a href="{% url 'decode_blog:edit_blog' n.id %}">Редактировать</a> </li>
-            <li class="delete-link"><a href="{% url 'decode_blog:delete_blog' n.id %}" class="danger">Удалить</a></li>
-          </ul>
-        </span>
+<div class="blog-item">
+  {% if n.image %}
+    <img class="blog-item--img" src="{{ n.image.url }}" alt="">
+  {% endif %}
+  <div class="blog-header">
+    <p class="blog-header-p">{{ n.name }}</p>
+    
+    {% if n.author == request.user %} {# Check if the user is the author #}
+    <span class="link" data-dropdown="dropdown">
+      <img src="{% static 'decode_blog/images/dots.svg' %}" alt="">
+      Еще
+      <ul class="dropdown">
+        <li class="edit-link"> <a href="{% url 'decode_blog:edit_blog' n.id %}">Редактировать</a> </li>
+        <li class="delete-link"><a href="{% url 'decode_blog:delete_blog' n.id %}" class="danger">Удалить</a></li>
+      </ul>
+    </span>
+    {% endif %}
 
 
       </div>

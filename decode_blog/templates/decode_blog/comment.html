@@ -86,17 +86,25 @@
                 {{ comments.count }} комментарий
             </h2>
             {% for c in comments %}
-            <div class="comment">
-              
-                <div class="comment-header">
-                    <img src="{% static 'decode_blog/images/avatar.png' %}" alt="">
-                    {{ c.user }}
-                </div>
-                <p class="comment-warning">
-                {{ c.text }}
-                </p>
-            </div>
-            {% endfor %}
+<div class="comment">
+    <div class="comment-header">
+        <img src="{% static 'decode_blog/images/avatar.png' %}" alt="">
+        {{ c.user }}
+    </div>
+    {% if request.user == c.user %}
+    <p class="comment-warning">
+        {{ c.text }}
+        <a href="{% url 'decode_blog:edit_comment' comment_id=c.id %}">Edit Comment</a>
+      </p>
+
+    </p>
+    {% else %}
+    <p class="comment-warning">
+        {{ c.text }}
+    </p>
+    {% endif %}
+</div>
+{% endfor %}
             {% if request.user.is_authenticated %}
             <form class="comment-add" action="{% url 'decode_blog:testcomadd' %}" method="post">
               {% csrf_token %}

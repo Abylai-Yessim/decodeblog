@@ -12,11 +12,14 @@ from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.models import User
 # from .models import Newblog 
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from .models import *
 from .forms import *
 from .serializer import *
 from django.db.models import Q
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import EditCommentForm
+from .models import Comment
+
 
 # Create your views here.
 
@@ -243,3 +246,18 @@ class CreateComment(APIView):
         new_comment.save()
 
         return redirect('decode_blog:comments-blog', blog_id)
+    
+
+
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.method == 'POST':
+        form = EditCommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('decode_blog:comments-blog', blog_id=comment.blog.id)
+    else:
+        form = EditCommentForm(instance=comment)
+
+    return render(request, 'decode_blog/edit_comment.html', {'form': form, 'comment': comment})

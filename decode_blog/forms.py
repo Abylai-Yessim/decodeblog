@@ -47,3 +47,8 @@ class CommentForm(forms.ModelForm):
             'description':forms.Textarea(attrs={'rows':3})
         }
 
+
+class EditCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
