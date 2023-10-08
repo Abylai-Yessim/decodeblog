@@ -15,9 +15,9 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+    <button type="submit" class="button-save">Сохранить</button>
+    <a href="{% url 'decode_blog:comments-blog' blog_id=comment.blog.id %}" class="back-comment">Назад</a>
   </form>
-  <a href="{% url 'decode_blog:comments-blog' blog_id=comment.blog.id %}">Back to Comments</a>
   {% endblock %}
 </body>
 </html>
